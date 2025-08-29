@@ -64,16 +64,32 @@ export function getParsedUrls() {
   return output;
 }
 
+/**
+ * Get all configured CORS proxy URLs
+ * Supports multiple proxies for automatic rotation and failover
+ * @returns Array of proxy URLs for CORS requests
+ */
 export function getProxyUrls() {
   return getParsedUrls()
     .filter((v) => v.type === "proxy")
     .map((v) => v.url);
 }
 
+/**
+ * Get all configured M3U8 proxy URLs
+ * These proxies are used for streaming media content
+ * Supports multiple proxies with health checking and rotation
+ * @returns Array of M3U8 proxy URLs
+ */
 export function getM3U8ProxyUrls(): string[] {
   return conf().M3U8_PROXY_URLS;
 }
 
+/**
+ * Get all configured provider API URLs
+ * Used for API requests to content providers
+ * @returns Array of provider API URLs
+ */
 export function getProviderApiUrls() {
   return getParsedUrls()
     .filter((v) => v.type === "api")

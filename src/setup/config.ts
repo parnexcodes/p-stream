@@ -130,10 +130,16 @@ export function conf(): RuntimeConfig {
     ONBOARDING_PROXY_INSTALL_LINK: getKey("ONBOARDING_PROXY_INSTALL_LINK"),
     BACKEND_URL: getKey("BACKEND_URL", BACKEND_URL),
     TMDB_READ_API_KEY: getKey("TMDB_READ_API_KEY"),
+    // Multiple proxy support: Comma-separated proxy URLs for automatic rotation and failover
+    // Single proxy: "https://proxy.com" -> ["https://proxy.com"]
+    // Multiple proxies: "https://proxy1.com,https://proxy2.com" -> ["https://proxy1.com", "https://proxy2.com"]
     PROXY_URLS: getKey("CORS_PROXY_URL", "")
       .split(",")
       .map((v) => v.trim())
       .filter((v) => v.length > 0),
+
+    // M3U8 proxy URLs with same multiple proxy support as CORS proxies
+    // These proxies are used for streaming media content and support health checking
     M3U8_PROXY_URLS: getKey("M3U8_PROXY_URL", "")
       .split(",")
       .map((v) => v.trim())
