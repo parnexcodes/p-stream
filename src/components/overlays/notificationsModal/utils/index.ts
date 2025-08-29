@@ -1,4 +1,5 @@
 import { proxiedFetch } from "@/backend/helpers/fetch";
+import { getAppName } from "@/utils/appName";
 
 const DEFAULT_FEEDS = ["/notifications.xml"];
 
@@ -41,7 +42,7 @@ export const fetchRssFeed = async (feedUrl: string): Promise<string> => {
 
 export const getSourceName = (feedUrl: string): string => {
   if (feedUrl === "/notifications.xml") {
-    return "P-Stream";
+    return getAppName();
   }
 
   try {

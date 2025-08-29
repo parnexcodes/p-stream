@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/buttons/Button";
 import { Icons } from "@/components/Icon";
 import { IconPill } from "@/components/layout/IconPill";
-import { Navigation } from "@/components/layout/Navigation";
 import { Title } from "@/components/text/Title";
 import { Paragraph } from "@/components/utils/Text";
 import { ErrorContainer, ErrorLayout } from "@/pages/layouts/ErrorLayout";
+import { getAppName, getDiscordUrl } from "@/utils/appName";
 
 export function NotFoundPart() {
   const { t } = useTranslation();
@@ -27,13 +27,13 @@ export function NotFoundPart() {
               This page isn&apos;t available on the embed! <br />
               If you believe this is an error, please report it to the{" "}
               <a
-                href="https://discord.gg/7z6znYgrTG"
+                href={getDiscordUrl()}
                 target="_blank"
                 rel="noreferrer"
                 className="text-type-link whitespace-nowrap"
               >
                 {" "}
-                P-Stream Discord
+                {getAppName()} Discord
               </a>{" "}
               server.
             </Paragraph>

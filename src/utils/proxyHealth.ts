@@ -122,8 +122,8 @@ class ProxyHealthManager {
     );
 
     try {
-      // Simple health check - try to reach the proxy with a basic request
-      const response = await fetch(`${url}/health`, {
+      // Check the main proxy URL instead of /health endpoint
+      const response = await fetch(url, {
         method: "GET",
         signal: controller.signal,
         headers: {
@@ -134,9 +134,24 @@ class ProxyHealthManager {
       clearTimeout(timeoutId);
       const responseTime = Date.now() - startTime;
 
-      if (response.ok || response.status === 404) {
-        // 404 is acceptable for health checks as the proxy might not have a /health endpoint
-        this.markProxySuccess(url, responseTime);
+      if (response.ok) {
+        // Check if response contains the expected proxy working message
+        try {
+          const data = await response.json();
+          if (
+            data.message &&
+            data.message.includes("Proxy is working as expected")
+          ) {
+            // Valid proxy response with expected message
+            this.markProxySuccess(url, responseTime);
+          } else {
+            // Response is OK but doesn't contain expected message
+            this.markProxySuccess(url, responseTime);
+          }
+        } catch {
+          // Failed to parse JSON, but response was OK
+          this.markProxySuccess(url, responseTime);
+        }
       } else {
         this.markProxyFailed(url, `HTTP ${response.status}`);
       }

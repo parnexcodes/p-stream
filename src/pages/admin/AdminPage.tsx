@@ -6,6 +6,7 @@ import { M3U8TestPart } from "@/pages/parts/admin/M3U8TestPart";
 import { RegionSelectorPart } from "@/pages/parts/admin/RegionSelectorPart";
 import { TMDBTestPart } from "@/pages/parts/admin/TMDBTestPart";
 import { WorkerTestPart } from "@/pages/parts/admin/WorkerTestPart";
+import { getAppName } from "@/utils/appName";
 
 import { BackendTestPart } from "../parts/admin/BackendTestPart";
 import { EmbedOrderPart } from "../parts/admin/EmbedOrderPart";
@@ -15,7 +16,9 @@ export function AdminPage() {
     <SubPageLayout>
       <ThinContainer>
         <Heading1>Admin tools</Heading1>
-        <Paragraph>Silly tools used test P-Stream! ૮₍´˶• . • ⑅ ₎ა</Paragraph>
+        <Paragraph>
+          Silly tools used test {getAppName()}! ૮₍´˶• . • ⑅ ₎ა
+        </Paragraph>
 
         <ConfigValuesPart />
         <BackendTestPart />

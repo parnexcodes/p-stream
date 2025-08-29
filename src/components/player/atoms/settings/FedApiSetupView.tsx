@@ -13,6 +13,7 @@ import { AuthInputBox } from "@/components/text-inputs/AuthInputBox";
 import { useOverlayRouter } from "@/hooks/useOverlayRouter";
 import { Status, testFebboxKey } from "@/pages/parts/settings/SetupPart";
 import { usePreferencesStore } from "@/stores/preferences";
+import { getAppName, getFebboxUrl } from "@/utils/appName";
 
 async function getFebboxKeyStatus(febboxKey: string | null) {
   if (febboxKey) {
@@ -91,14 +92,14 @@ export function FedApiSetupView({ id }: { id: string }) {
                       src="https://player.vimeo.com/video/1059834885?h=c3ab398d42&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                       allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                       className="absolute top-0 left-0 w-full h-full border border-type-secondary rounded-lg bg-black"
-                      title="P-Stream FED API Setup Tutorial"
+                      title={`${getAppName()} FED API Setup Tutorial`}
                     />
                   </div>
                   <br />
                 </>
               )}
-              1. Go to <MwLink url="https://febbox.com">febbox.com</MwLink> and
-              log in with Google (use a fresh account!)
+              1. Go to <MwLink url={getFebboxUrl()}>febbox.com</MwLink> and log
+              in with Google (use a fresh account!)
               <br />
               2. Open DevTools or inspect the page
               <br />

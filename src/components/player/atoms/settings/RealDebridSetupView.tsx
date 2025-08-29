@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Button } from "@/components/buttons/Button";
-import { Icon, Icons } from "@/components/Icon";
 import { Menu } from "@/components/player/internals/ContextMenu";
 import {
   StatusCircle,

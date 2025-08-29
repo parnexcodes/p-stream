@@ -13,6 +13,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { PlayerMeta, playerStatus } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
 import { useWatchPartyStore } from "@/stores/watchParty";
+import { getAppDomain } from "@/utils/appName";
 
 import { ScrapingPartInterruptButton, Tips } from "./ScrapingPart";
 
@@ -151,7 +152,7 @@ export function PlayerPart(props: PlayerPartProps) {
           {new URLSearchParams(window.location.search).get("logo") !==
             "false" && (
             <a
-              href="https://pstream.org"
+              href={getAppDomain()}
               target="_blank"
               rel="noreferrer"
               className="hidden sm:flex items-center justify-end"

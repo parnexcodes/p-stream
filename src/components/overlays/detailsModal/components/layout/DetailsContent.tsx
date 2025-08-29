@@ -9,6 +9,7 @@ import { useLanguageStore } from "@/stores/language";
 import { usePreferencesStore } from "@/stores/preferences";
 import { useProgressStore } from "@/stores/progress";
 import { shouldShowProgress } from "@/stores/progress/utils";
+import { getAppName } from "@/utils/appName";
 import { scrapeIMDb } from "@/utils/imdbScraper";
 import { getTmdbLanguageCode } from "@/utils/language";
 import { scrapeRottenTomatoes } from "@/utils/rottenTomatoesScraper";
@@ -170,7 +171,7 @@ export function DetailsContent({ data, minimal = false }: DetailsContentProps) {
     if (/iPad|iPhone|iPod/i.test(navigator.userAgent) && navigator.share) {
       navigator
         .share({
-          title: "P-Stream",
+          title: getAppName(),
           text: data.title,
           url: shareUrl,
         })

@@ -34,6 +34,7 @@ export default defineConfig(({ mode }) => {
             env.VITE_APP_DOMAIN +
             (env.VITE_NORMAL_ROUTER !== "true" ? "/#" : ""),
           domain: env.VITE_APP_DOMAIN,
+          appName: env.VITE_APP_NAME || "P-Stream",
           env,
         },
       }),
@@ -67,8 +68,8 @@ export default defineConfig(({ mode }) => {
           "safari-pinned-tab.svg",
         ],
         manifest: {
-          name: "P-Stream",
-          short_name: "P-Stream",
+          name: process.env.VITE_APP_NAME || "P-Stream",
+          short_name: process.env.VITE_APP_NAME || "P-Stream",
           description: "Watch your favorite shows and movies for free with no ads ever! (っ'ヮ'c)",
           theme_color: "#000000",
           background_color: "#000000",

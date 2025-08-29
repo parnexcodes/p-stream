@@ -29,6 +29,12 @@ import {
 import { conf } from "@/setup/config";
 import { useAuthStore } from "@/stores/auth";
 import { usePreferencesStore } from "@/stores/preferences";
+import {
+  getAppName,
+  getDocsUrl,
+  getFebboxUrl,
+  getRealDebridUrl,
+} from "@/utils/appName";
 
 interface ProxyEditProps {
   proxyUrls: string[] | null;
@@ -98,7 +104,7 @@ function ProxyEdit({
           </p>
           <p className="max-w-[30rem] font-medium">
             <Trans i18nKey="settings.connections.workers.description">
-              <MwLink to="https://docs.pstream.mov/proxy/deploy">
+              <MwLink to={`${getDocsUrl()}/proxy/deploy`}>
                 {t("settings.connections.workers.documentation")}
               </MwLink>
             </Trans>
@@ -184,7 +190,7 @@ function BackendEdit({ backendUrl, setBackendUrl }: BackendEditProps) {
           </p>
           <p className="max-w-[30rem] font-medium">
             <Trans i18nKey="settings.connections.server.description">
-              <MwLink to="https://docs.pstream.mov/backend/deploy">
+              <MwLink to={`${getDocsUrl()}/backend/deploy`}>
                 {t("settings.connections.server.documentation")}
               </MwLink>
             </Trans>
@@ -315,14 +321,14 @@ function FebboxKeyEdit({ febboxKey, setFebboxKey }: FebboxKeyProps) {
                           src="https://player.vimeo.com/video/1059834885?h=c3ab398d42&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                           className="absolute top-0 left-0 w-full h-full border border-type-secondary rounded-lg bg-black"
-                          title="P-Stream FED API Setup Tutorial"
+                          title={`${getAppName()} FED API Setup Tutorial`}
                         />
                       </div>
                       <br />
                     </>
                   )}
                   <Trans i18nKey="fedapi.setup.step.1">
-                    <MwLink url="https://febbox.com" />
+                    <MwLink url={getFebboxUrl()} />
                   </Trans>
                   <br />
                   <Trans i18nKey="fedapi.setup.step.2" />
@@ -460,11 +466,7 @@ function RealDebridKeyEdit({
               {t("realdebrid.description")}
             </p>
             <MwLink>
-              <a
-                href="https://real-debrid.com/"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={getRealDebridUrl()} target="_blank" rel="noreferrer">
                 real-debrid.com
               </a>
             </MwLink>

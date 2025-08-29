@@ -23,7 +23,7 @@ export interface ProxyManagerConfig {
 
 const DEFAULT_CONFIG: ProxyManagerConfig = {
   testTimeout: 10000, // 10 seconds
-  testEndpoint: "/health", // Default health check endpoint
+  testEndpoint: "", // Use main URL instead of health endpoint
 };
 
 class ProxyManager {
@@ -45,7 +45,7 @@ class ProxyManager {
     );
 
     try {
-      // Use a test URL or default health check endpoint
+      // Use a test URL or the main proxy URL
       const targetUrl = testUrl || `${url}${this.config.testEndpoint}`;
 
       const response = await fetch(targetUrl, {
@@ -60,9 +60,31 @@ class ProxyManager {
       clearTimeout(timeoutId);
       const responseTime = Date.now() - startTime;
 
+      let success = response.ok;
+
+      // Check for expected proxy response format
+      if (success) {
+        try {
+          const data = await response.json();
+          // Look for the expected "Proxy is working as expected" message
+          if (
+            data.message &&
+            data.message.includes("Proxy is working as expected")
+          ) {
+            success = true;
+          } else {
+            // Response is OK but doesn't contain expected message, still consider successful
+            success = true;
+          }
+        } catch {
+          // Failed to parse JSON, but response was OK
+          success = true;
+        }
+      }
+
       return {
         url,
-        success: response.ok || response.status === 404, // 404 is acceptable
+        success,
         responseTime,
         statusCode: response.status,
       };

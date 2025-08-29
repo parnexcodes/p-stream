@@ -4,6 +4,7 @@ import { makeVideoElementDisplayInterface } from "@/components/player/display/ba
 import { convertSubtitlesToObjectUrl } from "@/components/player/utils/captions";
 import { playerStatus } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
+import { getAppName } from "@/utils/appName";
 
 import { useInitializeSource } from "../hooks/useInitializePlayer";
 
@@ -91,7 +92,7 @@ function VideoElement() {
   if (captionAsTrack && trackObjectUrl && language)
     subtitleTrack = (
       <track
-        label="P-Stream Captions"
+        label={`${getAppName()} Captions`}
         kind="subtitles"
         srcLang={language}
         src={trackObjectUrl}

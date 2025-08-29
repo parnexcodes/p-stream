@@ -42,6 +42,7 @@ import {
 import { PageTitle } from "@/pages/parts/util/PageTitle";
 import { conf } from "@/setup/config";
 import { usePreferencesStore } from "@/stores/preferences";
+import { getAppName, getDiscordUrl, getFebboxUrl } from "@/utils/appName";
 import { getProxyUrls } from "@/utils/proxyUrls";
 
 import {
@@ -155,14 +156,14 @@ export function FEDAPISetup() {
                             src="https://player.vimeo.com/video/1059834885?h=c3ab398d42&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                             className="absolute top-0 left-0 w-full h-full border border-type-secondary rounded-lg bg-black"
-                            title="P-Stream FED API Setup Tutorial"
+                            title={`${getAppName()} FED API Setup Tutorial`}
                           />
                         </div>
                         <br />
                       </>
                     )}
                     <Trans i18nKey="fedapi.setup.step.1">
-                      <MwLink url="https://febbox.com" />
+                      <MwLink url={getFebboxUrl()} />
                     </Trans>
                     <br />
                     <Trans i18nKey="fedapi.setup.step.2" />
@@ -494,7 +495,7 @@ export function OnboardingPage() {
         <div>
           <Trans i18nKey="onboarding.start.moreInfo.explainer.outro">
             <a
-              href="https://discord.com/invite/7z6znYgrTG"
+              href={getDiscordUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="text-type-link"
